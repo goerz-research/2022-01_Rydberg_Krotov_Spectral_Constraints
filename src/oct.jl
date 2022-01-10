@@ -110,7 +110,7 @@ end
 
 
 function run_oct(;
-    α=1e-11, T=138ns, nt=1380, λₐ=1e12, iter_stop=100,
+    α=1e-11, T=138ns, nt=1380, λₐ=1e12, iter_stop=10000,
     ν_min=0.0, ν_max=0.0, spec_filter_t_rise=2.155ns
 )
 
