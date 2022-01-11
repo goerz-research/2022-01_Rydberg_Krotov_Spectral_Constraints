@@ -2,7 +2,9 @@
 #                          DrWatson Project Structure                          #
 ################################################################################
 
-# Folders to ignore - files may be too large, too many, etc. NOTE: EDIT IF NEEDED.
+# Files/Folders to ignore - files may be too large, too many, etc. NOTE: EDIT IF NEEDED.
+.make_jl
+.initialized
 
 ################################################################################
 #                                    Julia                                     #

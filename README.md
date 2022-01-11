@@ -16,13 +16,13 @@ To (locally) reproduce this project, do the following:
     c. Start a Julia REPL (run the `julia` exectuable), and do
 
     ```
-    julia> using Pkg
-    julia> Pkg.add("DrWatson")
     julia> include("path/to/this/project/intro.jl")
     ```
 
     This will install all necessary packages for you to be able to run the scripts and
     everything should work out of the box, including correctly finding local paths.
+
+    Alternatively, run `make init` from the root project folder.
 
 2.  Reproduce the results
 
@@ -33,3 +33,5 @@ To (locally) reproduce this project, do the following:
     ```
 
     Running the script inside the REPL has the benefit of avoiding compilation overhead when running multiple scripts.
+
+    You may also run `make` from the project root to run all scripts with missing ouput.
