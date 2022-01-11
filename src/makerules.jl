@@ -25,7 +25,7 @@ struct IncludableScriptRule <: AbstractRule
     main::Union{Symbol, Nothing}
     args::Vector{String}
     function IncludableScriptRule(
-        targets, script; mod=nothing, main=:main, args=String[]
+        targets, script; mod=:_progmod, main=:main, args=String[]
     )
         new(targets, script, mod, main, args)
     end
@@ -33,7 +33,7 @@ end
 
 
 function IncludableScriptRule(;
-    targets, script, mod=nothing, main=:main, args=String[]
+    targets, script, mod=:_progmod, main=:main, args=String[]
 )
     IncludableScriptRule(targets, script, mod=mod, main=main, args=args)
 end
