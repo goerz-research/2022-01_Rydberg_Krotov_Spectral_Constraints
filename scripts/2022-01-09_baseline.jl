@@ -14,7 +14,7 @@ using Plots
 unicodeplots()
 
 
-function main()
+function main(args=ARGS)
     ν_max = 0.0
     args = Dict(
         :iter_stop=>100,
@@ -30,4 +30,7 @@ end
 
 end
 
-BaselineProg.main()
+_progmod = BaselineProg
+if abspath(PROGRAM_FILE) == @__FILE__
+    _progmod.main()
+end

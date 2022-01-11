@@ -26,10 +26,11 @@ To (locally) reproduce this project, do the following:
 
 2.  Reproduce the results
 
-    Run any of the scripts in the `./scripts` subfolder. Use either, e.g. `julia ./scripts/2022-01-09_baseline.jl`, or start a Julia REPL and do
+    Run any of the scripts in the `./scripts` subfolder. Use either, e.g. `julia ./scripts/2022-01-09_baseline.jl`, or start a Julia REPL and do, e.g.
 
     ```
     julia> include("./scripts/2022-01-09_baseline.jl")
+    julia> _progmod.main()
     ```
 
     Running the script inside the REPL has the benefit of avoiding compilation overhead when running multiple scripts.

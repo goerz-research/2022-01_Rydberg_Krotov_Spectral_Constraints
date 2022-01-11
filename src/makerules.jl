@@ -18,17 +18,51 @@ end
 abstract type AbstractRule end
 
 
-struct ScriptRule <: AbstractRule
-    # targets are produced by running script without args
+struct IncludableScriptRule <: AbstractRule
     targets::Vector{String}
     script::String
+    mod::Union{Symbol, Nothing}
+    main::Union{Symbol, Nothing}
+    args::Vector{String}
+    function IncludableScriptRule(
+        targets, script; mod=nothing, main=:main, args=String[]
+    )
+        new(targets, script, mod, main, args)
+    end
 end
 
 
-function eval_rule(r::ScriptRule)
+function IncludableScriptRule(;
+    targets, script, mod=nothing, main=:main, args=String[]
+)
+    IncludableScriptRule(targets, script, mod=mod, main=main, args=args)
+end
+
+
+function eval_rule(r::IncludableScriptRule)
     if !targets_up_to_date(r.targets, [r.script])
-        @info "Running $(r.script) to produce $(r.targets)"
-        include(r.script)
+        mod = r.mod
+        main = r.main
+        args = r.args
+        if isnothing(main)
+            # The assumption is that the script is written in such a way that
+            # simply including it runs it. There is no way to pass arguments
+            if length(args) > 0
+                error("Passing arguments to $(r.script) requires a main function")
+            end
+            @info "Running $(r.script) to produce $(r.targets)"
+            include(r.script)
+        else
+            if isnothing(mod)
+                @info "Running $(r.script):$main($args) to produce $(r.targets)"
+                include(r.script)
+                @eval $main($args)
+            else
+                @info "Running $(r.script):$mod.$main($args) to produce $(r.targets)"
+                include(r.script)
+                @eval $mod.$main($args)
+            end
+        end
     else
         @info "$(r.targets): OK"
     end
