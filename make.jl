@@ -10,7 +10,4 @@ RULES = [
     )
 ]
 
-for rule in RULES
-    eval_rule(rule)
-end
-touch(joinpath(@__DIR__, ".make_jl"))
+make(ARGS, RULES)

@@ -1,4 +1,4 @@
-.PHONY: init help devrepl .FORCE
+.PHONY: init help devrepl clean .FORCE
 
 .DEFAULT_GOAL := all
 
@@ -28,4 +28,10 @@ init: ## Initialize the project
 devrepl: .initialized  ## Start an interactive REPL
 	julia --threads=auto --startup-file=yes -e 'using DrWatson; @quickactivate "RydbergKrotovSpectralConstraints"' -i
 
-all: .make_jl ## Ensure all output data
+all: .make_jl  ## Ensure all output data
+
+clean:  ## Remove generated files
+	julia make.jl clean
+
+distclean: clean  ## Restore clean repository state
+	rm .initialized
