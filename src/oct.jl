@@ -111,7 +111,7 @@ end
 
 function run_oct(;
     α=1e-11, T=138ns, nt=1380, λₐ=1e12, iter_stop=10000,
-    ν_min=0.0, ν_max=0.0, spec_filter_t_rise=2.155ns
+    ν_min=0.0, ν_max=0.0, spec_filter_t_rise=2.155ns, kwargs...
 )
 
     println("** Initialize objective")
@@ -143,15 +143,16 @@ function run_oct(;
     println("** Run optimization")
     if (ν_min ≠ 0.0) || (ν_max ≠ 0.0)
         opt_result = optimize(
-            problem, method=:krotov,
+            problem; method=:krotov,
             update_hook=spectral_filter(
                 ϵ0_real, ϵ0_imag, tlist;
                 ν_min=ν_min, ν_max=ν_max, t_rise=spec_filter_t_rise,
-            )
+            ),
+            kwargs...
         )
     else
         opt_result = optimize(
-            problem, method=:krotov,
+            problem; method=:krotov, kwargs...
         )
     end
     show_opt_result(opt_result)
