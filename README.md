@@ -36,3 +36,17 @@ To (locally) reproduce this project, do the following:
     Running the script inside the REPL has the benefit of avoiding compilation overhead when running multiple scripts.
 
     You may also run `make` from the project root to run all scripts with missing ouput.
+
+If you want to work on the project with Jupyter notebooks, you must have [IJulia](https://julialang.github.io/IJulia.jl/stable/) installed. The project initialization (`intro.jl`, see above) should have done this for you. Still, check that the kernel is installed correctly. In your terminal,
+
+```
+$ jupyter kernelspec list
+```
+
+should include a line similar to
+
+```
+  julia-1.7                   /home/mgoerz/.local/share/jupyter/kernels/julia-1.7
+```
+
+Double check that the `kernel.json` file in that path includes the flag `"--project=@."` (this ensures that the Julia kernel takes into account the settings in the closest `Project.toml` from where any notebook file is stored).
