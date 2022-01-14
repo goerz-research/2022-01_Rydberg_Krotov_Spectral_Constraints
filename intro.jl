@@ -1,11 +1,13 @@
 using Pkg
+Pkg.activate()
 Pkg.add("DrWatson")
 Pkg.add("Revise")
+Pkg.add("IJulia")
+Pkg.activate(@__DIR__)
+Pkg.instantiate()
 
 using DrWatson
 @quickactivate :RydbergKrotovSpectralConstraints
-
-Pkg.instantiate()
 
 println(
 """
